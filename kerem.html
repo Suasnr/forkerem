@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crash Into You - For Kerem</title>
+    <style>
+        body {
+            font-family: 'Georgia', serif;
+            background: #0A1F44;
+            color: #fff;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            perspective: 1000px;
+        }
+
+        #hologram-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, #0A1F44, #1F4068, #5A5A5A, #0A1F44);
+            background-size: 300% 300%;
+            animation: hologramMove 15s infinite alternate ease-in-out;
+            z-index: -1;
+        }
+
+        @keyframes hologramMove {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
+        }
+
+        .container {
+            text-align: center;
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        h1 {
+            font-size: 3em;
+            color: #FFD700;
+        }
+
+        .poem {
+            font-style: italic;
+            font-size: 1.5em;
+            line-height: 1.6em;
+            opacity: 0.9;
+        }
+
+        .moving-text {
+            position: absolute;
+            color: #FFD700;
+            font-size: 1.2em;
+            transition: transform 0.2s ease-in-out;
+        }
+
+        .moving-text:hover {
+            transform: scale(1.5);
+            color: #FF4500;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 1.2em;
+            background-color: #FFD700;
+            color: #0A1F44;
+            border: none;
+            cursor: pointer;
+            margin-top: 20px;
+            border-radius: 5px;
+        }
+
+        button:hover {
+            background-color: #FF4500;
+            color: #fff;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .nerve-line {
+            position: absolute;
+            width: 2px;
+            height: 50px;
+            background: #FFD700;
+            opacity: 0.7;
+            animation: pulse 1.5s infinite alternate;
+        }
+
+        @keyframes pulse {
+            from { transform: scaleY(1); opacity: 0.7; }
+            to { transform: scaleY(1.5); opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <div id="hologram-background"></div>
+    <div class="container">
+        <h1>For Kerem</h1>
+        <div class="poem">
+            <p class="moving-text" style="top: 10%; left: 5%;">"Loving you feels like crashing — beautiful, violent, unstoppable."</p>
+            <p class="moving-text" style="top: 40%; right: 10%;">"I hit you like a car skidding on ice, knowing the impact would destroy me, but never wanting to swerve."</p>
+            <p class="moving-text" style="bottom: 15%; left: 20%;">"You are the wreckage I’d walk into again and again, just to feel alive."</p>
+        </div>
+        <button id="play-song">Play Wildflower - Billie Eilish</button>
+    </div>
+    <script>
+        document.querySelectorAll('.moving-text').forEach(text => {
+            document.addEventListener('mousemove', (e) => {
+                const x = (window.innerWidth / 2 - e.pageX) / 20;
+                const y = (window.innerHeight / 2 - e.pageY) / 20;
+                text.style.transform = `translate(${x}px, ${y}px)`;
+            });
+        });
+
+        document.getElementById('play-song').addEventListener('click', () => {
+            window.open('https://www.youtube.com/watch?v=21tW6kC2nO0', '_blank');
+        });
+
+        document.addEventListener('mousemove', (e) => {
+            const nerve = document.createElement('div');
+            nerve.classList.add('nerve-line');
+            nerve.style.left = `${e.pageX}px`;
+            nerve.style.top = `${e.pageY}px`;
+            document.body.appendChild(nerve);
+
+            setTimeout(() => nerve.remove(), 500);
+        });
+    </script>
+</body>
+</html>
